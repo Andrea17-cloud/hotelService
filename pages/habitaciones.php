@@ -19,10 +19,17 @@ include "../components/cards/cardRoom.php";
         <div class="container-fluid py-4">
 
             <div class="row g-4">
-                <?php 
-                    echo cardRoom();
+                <?php
+                echo cardRoom();
+                echo cardRoom();
+                echo cardRoom();
+                echo cardRoom();
+                echo cardRoom();
+                echo cardRoom(roomData: ["status" => "reservado"]);
+                echo cardRoom(roomData: ["status" => "reservado"]);
+                echo cardRoom(roomData: ["status" => "reservado"]);
                 ?>
-                
+
             </div>
             <div class="row mt-4">
 

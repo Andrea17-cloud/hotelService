@@ -10,13 +10,19 @@
         
         [
             'type' => 'section',
-            'content' => 'Account pages'
+            'content' => 'Services pages'
         ],
         [
             'type' => 'page',
             'url' => '../pages/habitaciones.php',
             'icon' => 'bed',
             'name' => 'Rooms'
+        ],
+        [
+            'type' => 'page',
+            'url' => '../pages/reservaciones.php',
+            'icon' => 'check',
+            'name' => 'Reservaciones'
         ],
         [
             'type' => 'page',

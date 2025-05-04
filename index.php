@@ -1,6 +1,11 @@
-<?php 
-include "./components/header/head.php";
-include "./components/menu/sideMenu.php";
-include "./components/header/header.php";
-
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a href="./pages/sign-in.php">log in</a>
+</body>
+</html>
