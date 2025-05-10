@@ -1,4 +1,11 @@
-<?php include "../components/menu/dataMenu.php";
+<?php 
+include "../../components/menu/dataMenu.php";
+$url_base = "http://localhost:3000/admin/";
+
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: " . $url_base . "sign-in.php");
+}
 
 ?>
 
@@ -15,7 +22,7 @@
             <?php foreach( $sideMenu as $route ) {?>
                 <?php if ($route["type"] == "page"){?>
                     <li class="nav-item">
-                        <a class="nav-link text-white <?php echo ($controllerActive == $route["name"]) ? "active bg-gradient-primary" : ""; ?> " href="<?php echo $route["url"]?>">
+                        <a class="nav-link text-white <?php echo ($controllerActive == $route["name"]) ? "active bg-gradient-primary" : ""; ?> " href="<?php echo $url_base .$route["url"]?>">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10" translate="no"><?php echo $route["icon"]?></i>
                             </div>

@@ -2,7 +2,7 @@
 
 function cardRoom(array $roomData = []) {
     $defaultData = [
-        'image' => '../assets/img/hotelRooms/room.png',
+        'image' => '../../assets/img/hotelRooms/room.png',
         'title' => 'Habitación Ejemplo',
         'description' => 'Descripción de la habitación de ejemplo.',
         'status' => 'disponible',

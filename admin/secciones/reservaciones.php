@@ -1,19 +1,19 @@
 <?php
-include "../components/header/head.php";
-include "../components/cards/cardRoom.php";
+include "../../components/header/head.php";
+include "../../components/cards/cardRoom.php";
 
 ?>
 
 <body class="g-sidenav-show  bg-gray-200">
     <?php
     $controllerActive = "Reservaciones";
-    include "../components/menu/sideMenu.php";
+    include "../../components/menu/sideMenu.php";
 
     ?>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <?php
-        include "../components/header/header.php";
+        include "../../components/header/header.php";
         ?>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
@@ -43,7 +43,7 @@ include "../components/cards/cardRoom.php";
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                                        <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">John Michael</h6>
@@ -70,7 +70,7 @@ include "../components/cards/cardRoom.php";
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
+                                                        <img src="../../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">Alexa Liras</h6>
@@ -104,13 +104,13 @@ include "../components/cards/cardRoom.php";
 
         </div>
         <?php
-        include "../components/footer/footer.php";
+        include "../../components/footer/footer.php";
         ?>
     </main>
 
     <?php
-    include "../components/config.php";
-    include "../components/footer/footerDependence.php";
+    include "../../components/config.php";
+    include "../../components/footer/footerDependence.php";
     ?>
 
 </body>

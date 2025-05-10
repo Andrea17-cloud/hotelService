@@ -6,6 +6,6 @@
   <title>Document</title>
 </head>
 <body>
-  <a href="./pages/sign-in.php">log in</a>
+  <a href="./admin/sign-in.php">log in</a>
 </body>
 </html>
