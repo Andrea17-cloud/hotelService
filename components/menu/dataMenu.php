@@ -3,24 +3,30 @@
     $sideMenu = [
         [
             'type' => 'page',
-            'url' => '../pages/dashboard.php',
+            'url' => 'secciones/dashboard.php',
             'icon' => 'dashboard',
             'name' => 'Dashboard'
         ],
         
         [
             'type' => 'section',
-            'content' => 'Account pages'
+            'content' => 'Services pages'
         ],
         [
             'type' => 'page',
-            'url' => '../pages/habitaciones.php',
+            'url' => 'secciones/habitaciones.php',
             'icon' => 'bed',
             'name' => 'Rooms'
         ],
         [
             'type' => 'page',
-            'url' => '../pages/sign-in.php',
+            'url' => 'secciones/reservaciones.php',
+            'icon' => 'check',
+            'name' => 'Reservaciones'
+        ],
+        [
+            'type' => 'page',
+            'url' => 'cerrar.php',
             'icon' => 'login',
             'name' => 'Sign In'
         ]

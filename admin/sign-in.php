@@ -1,5 +1,27 @@
 <?php 
 include "../components/header/head.php";
+include "../backend/data/admin.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+  if(isset($_POST["user"]) && isset($_POST["password"])){
+    $userLogin = $_POST["user"];
+    $password = $_POST["password"];
+
+    foreach( $users as $user) {
+
+      if ($user["User"] == $userLogin && $user["Password"] == $password){
+
+        session_start() ;
+        $_SESSION['usuario']= $user['User'];
+
+        header("location: ./secciones/dashboard.php");
+        exit;
+      }
+    }
+
+  }
+}
 ?>
 
 <body class="bg-gray-200">
@@ -27,25 +49,25 @@ include "../components/header/head.php";
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
+                <form role="form" class="text-start" method="post">
                   <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
+                    <label class="form-label">User</label>
+                    <input type="text" class="form-control" name="user">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
+                    <input type="password" class="form-control" name="password">
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                     <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2" >Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
-                    Don't have an account?
-                    <a href="../pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    Only 
+                    <a class="text-primary text-gradient font-weight-bold">Admin</a>
                   </p>
                 </form>
               </div>

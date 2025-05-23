@@ -692,6 +692,7 @@ function darkMode(el) {
 
   if (!el.getAttribute("checked")) {
     body.classList.add('dark-version');
+    localStorage.setItem('darkMode', 'enabled'); // Guardar el estado en localStorage
     for (var i = 0; i < hr.length; i++) {
       if (hr[i].classList.contains('dark')) {
         hr[i].classList.remove('dark');
@@ -757,6 +758,7 @@ function darkMode(el) {
     el.setAttribute("checked", "true");
   } else {
     body.classList.remove('dark-version');
+    localStorage.setItem('darkMode', 'disabled'); // Guardar el estado en localStorage
     for (var i = 0; i < hr.length; i++) {
       if (hr[i].classList.contains('light')) {
         hr[i].classList.add('dark');
@@ -822,7 +824,8 @@ function darkMode(el) {
     }
     el.removeAttribute("checked");
   }
-};
+}
+
 
 
 // side bullets
