@@ -2,8 +2,8 @@
 
     $users = [
         [
-            "User" => "ADMIN",
-            "Password" => "ADMIN"
+            "User" => "admin",
+            "Password" => "admin"
         ]
     ]
 
