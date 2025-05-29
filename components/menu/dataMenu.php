@@ -18,6 +18,12 @@
             'icon' => 'bed',
             'name' => 'Rooms'
         ],
+                [
+            'type' => 'page',
+            'url' => 'secciones/cargos.php',
+            'icon' => 'list',
+            'name' => 'Cargos'
+        ],
         [
             'type' => 'page',
             'url' => 'secciones/reservaciones.php',

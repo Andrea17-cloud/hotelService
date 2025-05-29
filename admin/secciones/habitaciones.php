@@ -67,7 +67,7 @@ function calculateAge($birthdate) {
                 } catch (PDOException $e) {
                     error_log("Error al cargar habitaciones y reservas: " . $e->getMessage());
                     echo '<div class="alert alert-danger mx-3" role="alert">Error al cargar la información de las habitaciones: ' . htmlspecialchars($e->getMessage()) . '</div>';
-                    $allRoomsData = []; // Asegura que $allRoomsData esté vacío en caso de error
+                    $allRoomsData = []; 
                 }
 
                 // Renderizar las cards
