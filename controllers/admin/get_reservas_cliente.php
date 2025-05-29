@@ -1,10 +1,10 @@
 <?php
 session_start();
-include "../../backend/data/db.conexion.php"; // Asegúrate de que esta ruta sea correcta para tu estructura de archivos
+include "../../backend/data/db.conexion.php";
 
-header('Content-Type: application/json'); // Indica que la respuesta será JSON
+header('Content-Type: application/json');
 
-// Verificar si se recibió el parámetro 'dpi' en la URL
+
 if (!isset($_GET['dpi']) || empty($_GET['dpi'])) {
     echo json_encode(['status' => 'error', 'message' => 'DPI o Pasaporte no proporcionado.']);
     exit();
@@ -13,8 +13,6 @@ if (!isset($_GET['dpi']) || empty($_GET['dpi'])) {
 $dpi = $_GET['dpi'];
 
 try {
-    // Consulta para obtener las reservaciones 'en curso' de un cliente específico por su DPI/Pasaporte
-    // Incluye información relevante de la habitación y del cliente para la interfaz
     $stmt = $conexion->prepare("
         SELECT
             r.ID_Reservacion,
@@ -41,12 +39,11 @@ try {
     if ($reservations) {
         echo json_encode(['status' => 'success', 'reservations' => $reservations]);
     } else {
-        // Si no se encuentran reservaciones, se envía un estado 'info'
         echo json_encode(['status' => 'info', 'message' => 'No se encontraron reservaciones en curso para este DPI/Pasaporte.', 'reservations' => []]);
     }
 
 } catch (PDOException $e) {
-    error_log("Error en get_reservas_cliente.php: " . $e->getMessage()); // Registrar el error para depuración
+    error_log("Error en get_reservas_cliente.php: " . $e->getMessage());
     echo json_encode(['status' => 'error', 'message' => 'Error en la base de datos al buscar reservaciones.']);
 } catch (Exception $e) {
     error_log("Error general en get_reservas_cliente.php: " . $e->getMessage());

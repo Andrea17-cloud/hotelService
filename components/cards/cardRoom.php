@@ -10,9 +10,9 @@ function cardRoom(array $roomData = []) {
         'numero_habitacion' => '',
         'client_name' => '',
         'client_age' => '',
-        'reservation_id' => null, // ID de la reservación activa, si la hay
-        'edit_url_id' => null, // ID de la habitación para URLs
-        'total_cargos' => null // Nuevo campo para el total de cargos
+        'reservation_id' => null,
+        'edit_url_id' => null,
+        'total_cargos' => null
     ];
 
     $data = array_merge($defaultData, $roomData);
@@ -20,7 +20,7 @@ function cardRoom(array $roomData = []) {
     $badgeColor = ($data['status'] === 'ocupada') ? 'bg-danger' : 'bg-success';
     $badgeText = ucfirst($data['status']);
 
-    // --- INICIO: Personalizar la descripción ---
+
     $descriptionHtml = '<p class="text-sm text-secondary mb-1">Número: <strong>' . htmlspecialchars($data['numero_habitacion']) . '</strong></p>';
 
     if ($data['status'] === 'ocupada' && !empty($data['client_name'])) {
@@ -29,17 +29,15 @@ function cardRoom(array $roomData = []) {
             $descriptionHtml .= '<p class="text-sm text-secondary mb-1">Edad: ' . htmlspecialchars($data['client_age']) . ' años</p>';
         }
 
-        // Mostrar total de cargos si la habitación está ocupada y tenemos el dato
+
         $totalCargosDisplay = (is_numeric($data['total_cargos'])) ? number_format($data['total_cargos'], 2) : '0.00';
         $descriptionHtml .= '<p class="text-sm text-secondary mb-2">Cargos acumulados: Q<strong>' . $totalCargosDisplay . '</strong></p>';
 
     } else {
-        // Si está vacía, o no hay cliente
-        $descriptionHtml .= '<p class="text-sm text-secondary mb-2"></p>'; // Espacio en blanco si no hay más info relevante
-    }
-    // --- FIN: Personalizar la descripción ---
 
-    // Botones de acción
+        $descriptionHtml .= '<p class="text-sm text-secondary mb-2"></p>';
+    }
+
     $actionButtonsHtml = '';
     if ($data['status'] === 'ocupada') {
         $actionButtonsHtml .= '

@@ -30,7 +30,7 @@ function calculateAge($birthdate) {
             <div class="row g-4">
                 <?php
                 $allRoomsData = [];
-                $today = date('Y-m-d'); // Obtiene la fecha actual
+                $today = date('Y-m-d'); 
 
                 try {
                     $stmt = $conexion->prepare("
@@ -76,13 +76,13 @@ function calculateAge($birthdate) {
                         $currentStatus = 'vacía';
                         $clientName = '';
                         $clientAge = '';
-                        $totalCargos = 0; // Inicializamos en 0
+                        $totalCargos = 0;
 
                         if (!empty($room['ID_Reservacion']) && $room['EstadoReservacion'] === 'en curso') {
                             $currentStatus = 'ocupada';
                             $clientName = htmlspecialchars($room['NombreCliente'] . ' ' . $room['ApellidoCliente']);
                             $clientAge = calculateAge($room['FechaNacimientoCliente']);
-                            $totalCargos = $room['TotalCargos'] ?? 0; // Asignar el total, si es null, se queda en 0
+                            $totalCargos = $room['TotalCargos'] ?? 0;
                         }
 
                         echo cardRoom([
@@ -92,10 +92,10 @@ function calculateAge($birthdate) {
                             'status' => $currentStatus,
                             'client_name' => $clientName,
                             'client_age' => $clientAge,
-                            'reservation_id' => $room['ID_Reservacion'], // Pasamos el ID de la reserva
-                            'edit_url_id' => htmlspecialchars($room['ID_Habitacion']), // El ID de la habitación para detalles
-                            'edit_url' => 'detalle_habitacion.php?id=' . htmlspecialchars($room['ID_Habitacion']), // URL para ver detalles generales de la habitación
-                            'total_cargos' => $totalCargos // Pasamos el total de cargos
+                            'reservation_id' => $room['ID_Reservacion'], 
+                            'edit_url_id' => htmlspecialchars($room['ID_Habitacion']),
+                            'edit_url' => 'detalle_habitacion.php?id=' . htmlspecialchars($room['ID_Habitacion']),
+                            'total_cargos' => $totalCargos
                         ]);
                     }
                 } else {

@@ -1,6 +1,6 @@
 <?php
 
-session_start(); // Inicia la sesión
+session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -8,7 +8,6 @@ error_reporting(E_ALL);
 
 include "../../backend/data/db.conexion.php";
 
-// Función para guardar el mensaje en la sesión y redirigir
 function setStatusMessageAndRedirect($message, $type, $redirectTo) {
     $_SESSION['status_message'] = $message;
     $_SESSION['status_type'] = $type;
@@ -48,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 } else {
-    // Si la solicitud no es POST, redirigir
     setStatusMessageAndRedirect("Acceso no autorizado.", "danger", $reservationsPage);
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 include "../../components/header/head.php";
-include "../../backend/data/db.conexion.php"; // Ajusta la ruta si este archivo está en otro subdirectorio
+include "../../backend/data/db.conexion.php";
 
 $selectedReservationId = null;
 $reservationDetails = null;
@@ -8,12 +8,11 @@ $availableCharges = [];
 $message = '';
 $messageType = '';
 
-// --- Paso 1: Recibir el ID de la reservación seleccionada ---
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selected_reservation_id'])) {
     $selectedReservationId = $_POST['selected_reservation_id'];
 
     try {
-        // Obtener detalles de la reservación seleccionada
         $stmtReserva = $conexion->prepare("
             SELECT
                 r.ID_Reservacion,
@@ -40,10 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selected_reservation_
         if (!$reservationDetails) {
             $message = "Reservación no encontrada.";
             $messageType = "danger";
-            $selectedReservationId = null; // Invalida el ID si no se encontró
+            $selectedReservationId = null;
         }
 
-        // Obtener el catálogo de cargos
         $stmtCargos = $conexion->prepare("SELECT ID_Cargo, Descripcion, Precio FROM Cargo ORDER BY Descripcion ASC");
         $stmtCargos->execute();
         $availableCharges = $stmtCargos->fetchAll(PDO::FETCH_ASSOC);
@@ -55,23 +53,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selected_reservation_
         $selectedReservationId = null;
     }
 }
-// --- Paso 2: Procesar la adición de cargos ---
+
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_charges'])) {
-    $selectedReservationId = $_POST['reservation_id_for_charges']; // ID de la reserva a la que se le añaden cargos
-    $chargesToAdd = $_POST['charges'] ?? []; // Array de cargos seleccionados con sus cantidades
+    $selectedReservationId = $_POST['reservation_id_for_charges'];
+    $chargesToAdd = $_POST['charges'] ?? [];
 
     if (!empty($selectedReservationId) && !empty($chargesToAdd)) {
         try {
-            $conexion->beginTransaction(); // Inicia una transacción para asegurar la integridad
+            $conexion->beginTransaction();
 
-            // 1. Encontrar o crear el Factura_Encabezado para esta Reservacion
             $stmtFacturaEnc = $conexion->prepare("SELECT ID_Factura_Encabezado, Total FROM Factura_Encabezado WHERE FK_ID_Reservacion = :reservation_id");
             $stmtFacturaEnc->bindParam(':reservation_id', $selectedReservationId);
             $stmtFacturaEnc->execute();
             $facturaEncabezado = $stmtFacturaEnc->fetch(PDO::FETCH_ASSOC);
 
             if (!$facturaEncabezado) {
-                // Si no existe, crear uno nuevo
+
                 $stmtInsertEnc = $conexion->prepare("INSERT INTO Factura_Encabezado (FK_ID_Reservacion, Total, Fecha_Factura, Estatus) VALUES (:reservation_id, 0, NOW(), 'pendiente')");
                 $stmtInsertEnc->bindParam(':reservation_id', $selectedReservationId);
                 $stmtInsertEnc->execute();
@@ -84,11 +81,10 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_charges'])) {
 
             $newTotalAmount = $currentTotal;
 
-            // 2. Insertar los cargos en Factura_Detalle y calcular el nuevo total
+
             foreach ($chargesToAdd as $cargoId => $quantity) {
-                $quantity = (int)$quantity; // Asegura que la cantidad sea un entero
+                $quantity = (int)$quantity; 
                 if ($quantity > 0) {
-                    // Obtener precio unitario del cargo
                     $stmtPrecio = $conexion->prepare("SELECT Precio FROM Cargo WHERE ID_Cargo = :cargo_id");
                     $stmtPrecio->bindParam(':cargo_id', $cargoId);
                     $stmtPrecio->execute();
@@ -112,24 +108,23 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_charges'])) {
                 }
             }
 
-            // 3. Actualizar el Total en Factura_Encabezado
             $stmtUpdateEnc = $conexion->prepare("UPDATE Factura_Encabezado SET Total = :new_total WHERE ID_Factura_Encabezado = :factura_enc_id");
             $stmtUpdateEnc->bindParam(':new_total', $newTotalAmount);
             $stmtUpdateEnc->bindParam(':factura_enc_id', $facturaEncabezadoId);
             $stmtUpdateEnc->execute();
 
-            $conexion->commit(); // Confirma la transacción
+            $conexion->commit();
             $message = "Cargos añadidos exitosamente. Total actualizado: Q" . number_format($newTotalAmount, 2);
             $messageType = "success";
 
-            // Redirigir para evitar re-envío del formulario (Post-Redirect-Get pattern)
+
             $_SESSION['status_message'] = $message;
             $_SESSION['status_type'] = $messageType;
-            header("Location: add_charge.php?reservation_id=" . $selectedReservationId); // Volver a la misma página, pero con GET
+            header("Location: add_charge.php?reservation_id=" . $selectedReservationId);
             exit();
 
         } catch (PDOException $e) {
-            $conexion->rollBack(); // Deshace la transacción en caso de error
+            $conexion->rollBack();
             error_log("Error al añadir cargos: " . $e->getMessage());
             $message = "Error al añadir los cargos: " . $e->getMessage();
             $messageType = "danger";
@@ -139,8 +134,6 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_charges'])) {
         $messageType = "warning";
     }
 
-    // Si hubo un error en la adición, recargar detalles de reserva y cargos
-    // (Esto es necesario si no se hace el Post-Redirect-Get debido a un error)
     if ($messageType === "danger") {
         try {
             $stmtReserva = $conexion->prepare("
@@ -172,12 +165,10 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_charges'])) {
 
         } catch (PDOException $e) {
             error_log("Error al recargar datos después de fallo de adición: " . $e->getMessage());
-            // El mensaje principal ya lo tenemos, este es un error secundario
         }
     }
 
 }
-// --- Paso 3: Manejar redirección con GET después de una adición exitosa (Post-Redirect-Get) ---
 elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['reservation_id'])) {
     $selectedReservationId = $_GET['reservation_id'];
 

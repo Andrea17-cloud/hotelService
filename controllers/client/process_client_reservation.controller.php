@@ -111,7 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             setStatusMessageAndRedirect("No se pudo obtener o crear el ID del cliente.", "danger", $formPage);
         }
 
-        // 4. Lógica de asignación de habitación
         $ID_Habitacion_Asignada = null;
         $numeroHabitacionAsignada = '';
 
