@@ -1,9 +1,9 @@
 <?php
 
-$servidor = "172.22.160.223";
+$servidor = "172.17.85.123";
 $basededatos = "HEP";
 $usuario = "root";
-$contraseña = "admin1306";
+$contraseña = "admin-123";
 $puerto = 3307;
 
 try {

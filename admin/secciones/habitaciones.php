@@ -1,13 +1,12 @@
 <?php
 include "../../components/header/head.php";
-include "../../backend/data/db.conexion.php";
+include "../../backend/data/db.conexion.php"; 
 
 include "../../components/cards/cardRoom.php";
 
-// Función para calcular la edad
 function calculateAge($birthdate) {
     if (empty($birthdate) || $birthdate === '0000-00-00') {
-        return null; // O puedes devolver 'N/A' o 0
+        return null;
     }
     $dob = new DateTime($birthdate);
     $now = new DateTime();
@@ -34,7 +33,6 @@ function calculateAge($birthdate) {
                 $today = date('Y-m-d'); // Obtiene la fecha actual
 
                 try {
-                    // Consulta para obtener todas las habitaciones junto con la información de la reserva activa (si la hay) y el cliente
                     $stmt = $conexion->prepare("
                         SELECT
                             h.ID_Habitacion,
@@ -44,21 +42,24 @@ function calculateAge($birthdate) {
                             r.Estado AS EstadoReservacion,
                             c.Nombre AS NombreCliente,
                             c.Apellido AS ApellidoCliente,
-                            c.Fecha_Nacimiento AS FechaNacimientoCliente
+                            c.Fecha_Nacimiento AS FechaNacimientoCliente,
+                            fe.Total AS TotalCargos -- NUEVO: Traemos el total de cargos del Factura_Encabezado
                         FROM
                             Habitacion h
                         LEFT JOIN
                             Reservacion r ON h.ID_Habitacion = r.FK_ID_Habitacion
-                            AND r.Estado = 'en curso'
+                            AND r.Estado = 'en curso' -- Fíjate que aquí usamos 'en curso' con espacio
                             AND :today BETWEEN r.Fecha_Entrada AND r.Fecha_Salida
                         LEFT JOIN
                             Cliente c ON r.FK_ID_Cliente = c.ID_Cliente
+                        LEFT JOIN
+                            Factura_Encabezado fe ON r.ID_Reservacion = fe.FK_ID_Reservacion -- NUEVO: Unimos con Factura_Encabezado
                         ORDER BY
                             CASE
-                                WHEN r.Estado = 'en curso' AND :today BETWEEN r.Fecha_Entrada AND r.Fecha_Salida THEN 0 
-                                ELSE 1 
+                                WHEN r.Estado = 'en curso' AND :today BETWEEN r.Fecha_Entrada AND r.Fecha_Salida THEN 0
+                                ELSE 1
                             END,
-                            h.Numero_Habitacion ASC; 
+                            h.Numero_Habitacion ASC;
                     ");
                     $stmt->bindParam(':today', $today);
                     $stmt->execute();
@@ -67,20 +68,21 @@ function calculateAge($birthdate) {
                 } catch (PDOException $e) {
                     error_log("Error al cargar habitaciones y reservas: " . $e->getMessage());
                     echo '<div class="alert alert-danger mx-3" role="alert">Error al cargar la información de las habitaciones: ' . htmlspecialchars($e->getMessage()) . '</div>';
-                    $allRoomsData = []; 
+                    $allRoomsData = [];
                 }
 
-                // Renderizar las cards
                 if (!empty($allRoomsData)) {
                     foreach ($allRoomsData as $room) {
                         $currentStatus = 'vacía';
                         $clientName = '';
                         $clientAge = '';
+                        $totalCargos = 0; // Inicializamos en 0
 
                         if (!empty($room['ID_Reservacion']) && $room['EstadoReservacion'] === 'en curso') {
                             $currentStatus = 'ocupada';
                             $clientName = htmlspecialchars($room['NombreCliente'] . ' ' . $room['ApellidoCliente']);
                             $clientAge = calculateAge($room['FechaNacimientoCliente']);
+                            $totalCargos = $room['TotalCargos'] ?? 0; // Asignar el total, si es null, se queda en 0
                         }
 
                         echo cardRoom([
@@ -90,7 +92,10 @@ function calculateAge($birthdate) {
                             'status' => $currentStatus,
                             'client_name' => $clientName,
                             'client_age' => $clientAge,
-                            'edit_url' => 'detalle_habitacion.php?id=' . htmlspecialchars($room['ID_Habitacion'])
+                            'reservation_id' => $room['ID_Reservacion'], // Pasamos el ID de la reserva
+                            'edit_url_id' => htmlspecialchars($room['ID_Habitacion']), // El ID de la habitación para detalles
+                            'edit_url' => 'detalle_habitacion.php?id=' . htmlspecialchars($room['ID_Habitacion']), // URL para ver detalles generales de la habitación
+                            'total_cargos' => $totalCargos // Pasamos el total de cargos
                         ]);
                     }
                 } else {
