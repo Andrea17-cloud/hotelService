@@ -30,10 +30,10 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portafolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Reservar</a></li>
                     </ul>
                 </div>
             </div>
@@ -58,10 +58,10 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">We've got what you need!</h2>
+                        <h2 class="text-white mt-0">Algo sobre nosotros!</h2>
                         <hr class="divider divider-light" />
-                        <p class="text-white-75 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
-                        <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
+                        <p class="text-white-75 mb-4">En el Hotel Paraíso, te abrimos las puertas a un oasis de tranquilidad y confort. Somos más que un lugar para dormir; somos tu hogar lejos de casa. Cada detalle está pensado para que tu estancia sea una experiencia inolvidable, llena de calidez y momentos especiales. ¡Esperamos darte la bienvenida pronto a nuestro paraíso!</p>
+                        <a class="btn btn-light btn-xl" href="#services">Empecemos!</a>
                     </div>
                 </div>
             </div>
@@ -69,35 +69,28 @@
         <!-- Services-->
         <section class="page-section" id="services">
             <div class="container px-4 px-lg-5">
-                <h2 class="text-center mt-0">At Your Service</h2>
+                <h2 class="text-center mt-0">Nuestros servivios</h2>
                 <hr class="divider" />
-                <div class="row gx-4 gx-lg-5">
+                <div class="row gx-4 gx-lg-5 d-flex justify-content-center align-items-center">
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Sturdy Themes</h3>
-                            <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+                            <div class="mb-2"><i class="bi bi-cup fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Desayuno</h3>
+                            <p class="text-muted mb-0">Comienza tu día con energía gracias a nuestro delicioso desayuno, preparado con ingredientes frescos y locales.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Up to Date</h3>
-                            <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
+                            <div class="mb-2"><i class="bi bi-cup-straw fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Almuerzo</h3>
+                            <p class="text-muted mb-0">Disfruta de una pausa deliciosa con opciones variadas que satisfarán tu paladar en nuestro acogedor ambiente.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Ready to Publish</h3>
-                            <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Made with Love</h3>
-                            <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
+                            <div class="mb-2"><i class="bi bi-egg-fried fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Cena</h3>
+                            <p class="text-muted mb-0">Termina tu jornada con una exquisita cena, donde los sabores y la tranquilidad se unen para una experiencia culinaria memorable.</p>
                         </div>
                     </div>
                 </div>
@@ -109,56 +102,56 @@
                 <div class="row g-0">
                 
                     <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Project Name">
+                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Habitacion Simple">
                             <img class="img-fluid" src="assets/img/hotelRooms/room.png" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+                                <div class="project-category text-white-50">Habitacion</div>
+                                <div class="project-name">Simple</div>
                             </div>
                         </a>
                     </div>
                                         <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Project Name">
+                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Habitacion Doble">
                             <img class="img-fluid" src="assets/img/hotelRooms/room.png" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+                                <div class="project-category text-white-50">Habitacion</div>
+                                <div class="project-name">Doble</div>
                             </div>
                         </a>
                     </div>
                                         <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Project Name">
+                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Habitacion Suite">
                             <img class="img-fluid" src="assets/img/hotelRooms/room.png" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+                                <div class="project-category text-white-50">Habitacion</div>
+                                <div class="project-name">Suite</div>
                             </div>
                         </a>
                     </div>
                                         <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Project Name">
+                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Habitacion Familiar">
                             <img class="img-fluid" src="assets/img/hotelRooms/room.png" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+                                <div class="project-category text-white-50">Habitacion</div>
+                                <div class="project-name">Familiar</div>
                             </div>
                         </a>
                     </div>
                                         <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Project Name">
+                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Habitacion Deluxe">
                             <img class="img-fluid" src="assets/img/hotelRooms/room.png" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+                                <div class="project-category text-white-50">Habitacion</div>
+                                <div class="project-name">Deluxe</div>
                             </div>
                         </a>
                     </div>
                                         <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Project Name">
+                        <a class="portfolio-box" href="assets/img/hotelRooms/room.png" title="Habitacion Estandar">
                             <img class="img-fluid" src="assets/img/hotelRooms/room.png" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+                                <div class="project-category text-white-50">Habitacion</div>
+                                <div class="project-name">Estandar</div>
                             </div>
                         </a>
                     </div>
@@ -168,7 +161,7 @@
         <!-- Call to action-->
         <section class="page-section bg-dark text-white">
             <div class="container px-4 px-lg-5 text-center">
-                <h2 class="mb-4">HEP</h2>
+                <h2 class="mb-4">Hotel El Paraiso</h2>
             </div>
         </section>
         <!-- Contact-->
@@ -176,9 +169,9 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 col-xl-6 text-center">
-                        <h2 class="mt-0">Let's Get In Touch!</h2>
+                        <h2 class="mt-0">Reservar!</h2>
                         <hr class="divider" />
-                        <p class="text-muted mb-5">Ready to start your next project with us? Send us a messages and we will get back to you as soon as possible!</p>
+                        <p class="text-muted mb-5">¿Listo para desconectar y vivir una experiencia inolvidable? En el Hotel Paraíso, tu descanso y confort son nuestra prioridad. Reserva ahora y asegura tu lugar en este oasis de tranquilidad. </p>
                     </div>
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
