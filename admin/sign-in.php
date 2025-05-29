@@ -1,26 +1,42 @@
 <?php 
+include "../backend/data/db.conexion.php";
 include "../components/header/head.php";
 include "../backend/data/admin.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_POST["user"]) && isset($_POST["password"])){
+        $userLogin = $_POST["user"];
+        $password = $_POST["password"]; // Plain-text password from form
 
-  if(isset($_POST["user"]) && isset($_POST["password"])){
-    $userLogin = $_POST["user"];
-    $password = $_POST["password"];
+        try {
+            // Prepare a statement to select the user by their username (Nombre)
+            // In a real app, you'd select the HASHED password (e.g., `Contrasenia`)
+            $stmt = $conexion->prepare("SELECT ID_Trabajador, Nombre, Contrasenia FROM Trabajador WHERE Nombre = :userLogin");
+            $stmt->bindParam(':userLogin', $userLogin, PDO::PARAM_STR);
+            $stmt->execute();
 
-    foreach( $users as $user) {
+            $trabajador = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if ($user["User"] == $userLogin && $user["Password"] == $password){
+            if ($trabajador) {
+                if ($password == $trabajador['Contrasenia']) { 
+                    session_start();
+                    $_SESSION['usuario'] = $trabajador['Nombre'];
+                    $_SESSION['id_trabajador'] = $trabajador['ID_Trabajador'];
 
-        session_start() ;
-        $_SESSION['usuario']= $user['User'];
+                    header("location: ./secciones/dashboard.php");
+                    exit;
+                } else {
+                    $errorMessage = "Usuario o contraseña incorrectos.";
+                }
+            } else {
+                $errorMessage = "Usuario o contraseña incorrectos.";
+            }
 
-        header("location: ./secciones/dashboard.php");
-        exit;
-      }
+        } catch (PDOException $e) {
+            error_log("Error de autenticación desde DB: " . $e->getMessage());
+            $errorMessage = "Ha ocurrido un error en el servidor. Por favor, inténtelo de nuevo más tarde.";
+        }
     }
-
-  }
 }
 ?>
 
@@ -91,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="col-12 col-md-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white" target="_blank">Landing Pages</a>
+                  <a href="../index.php" class="nav-link pe-0 text-white" target="_blank">Landing Pages</a>
                 </li>
               </ul>
             </div>
@@ -103,6 +119,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   <?php
     include "../components/footer/footerDependence.php";
   ?>
+
+  <?php
+    if (!empty($errorMessage)) {
+        echo "<script type='text/javascript'>";
+        echo "alert('" . addslashes($errorMessage) . "');";
+        echo "</script>";
+    }
+    ?>
 </body>
 
 </html>
