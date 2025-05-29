@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_dpi'])) {
 ?>
 
 
-<body class="g-sidenav-show bg-gray-200">
+<body class="g-sidenav-show bg-gray-200 dark-version">
     <?php
     $controllerActive = "Cargos";
     include "../../components/menu/sideMenu.php";

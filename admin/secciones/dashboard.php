@@ -2,7 +2,7 @@
 include "../../components/header/head.php";
 include "../../components/cards/cardInfo.php"
 ?>
-<body class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show  bg-gray-200 dark-version">
   <?php 
   $controllerActive = "Dashboard";
   include "../../components/menu/sideMenu.php";

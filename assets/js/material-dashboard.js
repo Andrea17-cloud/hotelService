@@ -827,6 +827,133 @@ function darkMode(el) {
 }
 
 
+/**
+ * Alterna entre el modo oscuro y el modo claro aplicando y removiendo clases CSS.
+ * Esta función es completamente independiente y no utiliza localStorage ni depende
+ * de un elemento HTML específico para su estado.
+ */
+function toggleDarkMode() {
+  const body = document.getElementsByTagName('body')[0];
+
+  // Comprueba si el body tiene la clase 'dark-version' para determinar el estado actual
+  const isDarkModeEnabled = body.classList.contains('dark-version');
+
+  // Seleccionar todos los elementos afectados una sola vez
+  const hr = document.querySelectorAll('div:not(.sidenav) > hr');
+  const hr_card = document.querySelectorAll('div:not(.bg-gradient-dark) hr');
+  const text_btn = document.querySelectorAll('button:not(.btn) > .text-dark');
+  const text_span = document.querySelectorAll('span.text-dark, .breadcrumb .text-dark');
+  const text_span_white = document.querySelectorAll('span.text-white, .breadcrumb .text-white');
+  const text_strong = document.querySelectorAll('strong.text-dark');
+  const text_strong_white = document.querySelectorAll('strong.text-white');
+  const text_nav_link = document.querySelectorAll('a.nav-link.text-dark');
+  const text_nav_link_white = document.querySelectorAll('a.nav-link.text-white');
+  const secondary = document.querySelectorAll('.text-secondary');
+  const bg_gray_100 = document.querySelectorAll('.bg-gray-100');
+  const bg_gray_600 = document.querySelectorAll('.bg-gray-600');
+  const btn_text_dark = document.querySelectorAll('.btn.btn-link.text-dark, .material-icons.text-dark');
+  const btn_text_white = document.querySelectorAll('.btn.btn-link.text-white, .material-icons.text-white');
+  const card_border = document.querySelectorAll('.card.border');
+  const card_border_dark = document.querySelectorAll('.card.border.border-dark');
+  const svg = document.querySelectorAll('g');
+
+  if (!isDarkModeEnabled) {
+    // Activar modo oscuro
+    body.classList.add('dark-version');
+
+    hr.forEach(element => {
+      element.classList.replace('dark', 'light');
+    });
+    hr_card.forEach(element => {
+      element.classList.replace('dark', 'light');
+    });
+    text_btn.forEach(element => {
+      element.classList.replace('text-dark', 'text-white');
+    });
+    text_span.forEach(element => {
+      element.classList.replace('text-dark', 'text-white');
+    });
+    text_strong.forEach(element => {
+      element.classList.replace('text-dark', 'text-white');
+    });
+    text_nav_link.forEach(element => {
+      element.classList.replace('text-dark', 'text-white');
+    });
+    secondary.forEach(element => {
+      if (element.classList.contains('text-secondary')) {
+        element.classList.remove('text-secondary');
+        element.classList.add('text-white', 'opacity-8');
+      }
+    });
+    bg_gray_100.forEach(element => {
+      element.classList.replace('bg-gray-100', 'bg-gray-600');
+    });
+    btn_text_dark.forEach(element => {
+      element.classList.replace('text-dark', 'text-white');
+    });
+    svg.forEach(element => {
+      if (element.hasAttribute('fill')) {
+        element.setAttribute('fill', '#fff');
+      }
+    });
+    card_border.forEach(element => {
+      element.classList.add('border-dark');
+    });
+
+  } else {
+    // Desactivar modo oscuro (volver a modo claro)
+    body.classList.remove('dark-version');
+
+    hr.forEach(element => {
+      element.classList.replace('light', 'dark');
+    });
+    hr_card.forEach(element => {
+      element.classList.replace('light', 'dark');
+    });
+    text_btn.forEach(element => {
+      element.classList.replace('text-white', 'text-dark');
+    });
+    text_span_white.forEach(element => {
+      if (element.classList.contains('text-white') && !element.closest('.sidenav') && !element.closest('.card.bg-gradient-dark')) {
+        element.classList.remove('text-white');
+        element.classList.add('text-dark');
+      }
+    });
+    text_strong_white.forEach(element => {
+      element.classList.replace('text-white', 'text-dark');
+    });
+    text_nav_link_white.forEach(element => {
+      if (element.classList.contains('text-white') && !element.closest('.sidenav')) {
+        element.classList.remove('text-white');
+        element.classList.add('text-dark');
+      }
+    });
+    secondary.forEach(element => {
+      if (element.classList.contains('text-white')) {
+        element.classList.remove('text-white', 'opacity-8');
+        element.classList.add('text-secondary');
+      }
+    });
+    bg_gray_600.forEach(element => {
+      element.classList.replace('bg-gray-600', 'bg-gray-100');
+    });
+    svg.forEach(element => {
+      if (element.hasAttribute('fill')) {
+        element.setAttribute('fill', '#252f40');
+      }
+    });
+    btn_text_white.forEach(element => {
+      if (!element.closest('.card.bg-gradient-dark')) {
+        element.classList.remove('text-white');
+        element.classList.add('text-dark');
+      }
+    });
+    card_border_dark.forEach(element => {
+      element.classList.remove('border-dark');
+    });
+  }
+}
+
 
 // side bullets
 

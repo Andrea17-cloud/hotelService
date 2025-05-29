@@ -6,11 +6,9 @@ include "../backend/data/admin.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if(isset($_POST["user"]) && isset($_POST["password"])){
         $userLogin = $_POST["user"];
-        $password = $_POST["password"]; // Plain-text password from form
+        $password = $_POST["password"];
 
         try {
-            // Prepare a statement to select the user by their username (Nombre)
-            // In a real app, you'd select the HASHED password (e.g., `Contrasenia`)
             $stmt = $conexion->prepare("SELECT ID_Trabajador, Nombre, Contrasenia FROM Trabajador WHERE Nombre = :userLogin");
             $stmt->bindParam(':userLogin', $userLogin, PDO::PARAM_STR);
             $stmt->execute();
@@ -40,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 
-<body class="bg-gray-200">
+<body class="bg-gray-200 dark-version">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
     </div>
